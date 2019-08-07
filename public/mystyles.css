@@ -1,0 +1,15 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #CFE9F3;
+}
+
+#factor {
+  font-size: 30px;
+  /* display: inline-block; */
+  vertical-align: top;
+}
+
+#logo {
+  height: 40px;
+  width: 40px;
+}

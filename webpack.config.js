@@ -1,6 +1,6 @@
 module.exports = {
   entry: __dirname + '/client/App.jsx',
-  modules: {
+  module: {
     rules: [
       {
         test: [/\.jsx$/],
