@@ -39,8 +39,8 @@ class App extends React.Component {
     var otherCheckbox = document.getElementById("other-checkbox");
     var otherInput = document.getElementById("other-input");
     console.log(otherCheckbox, otherInput);
-    if (otherInput.hasAttribute('requred') !== true) {
-      otherInput.setAttribute('required', 'required');
+    if (otherInput.hasAttribute('required') !== true) {
+      otherInput.setAttribute('required', true);
     } else {
       otherInput.removeAttribute('required');
     }
