@@ -15,7 +15,8 @@ class App extends React.Component {
     this.showPackage = this.showPackage.bind(this);
     this.hidePackage = this.hidePackage.bind(this);
     this.updateFileList = this.updateFileList.bind(this);
-
+    this.addPackage = this.addPackage.bind(this);
+    this.toggleRequiredQuantity = this.toggleRequiredQuantity.bind(this);
   }
 
   showForm() {
@@ -34,6 +35,17 @@ class App extends React.Component {
     this.setState({visiblePackage: false})
   }
 
+  toggleRequiredQuantity() {
+    var otherCheckbox = document.getElementById("other-checkbox");
+    var otherInput = document.getElementById("other-input");
+    console.log(otherCheckbox, otherInput);
+    if (otherInput.hasAttribute('requred') !== true) {
+      otherInput.setAttribute('required', 'required');
+    } else {
+      otherInput.removeAttribute('required');
+    }
+  }
+
   updateFileList() {
     var input = document.getElementById('file');
     var output = document.getElementById('fileList');
@@ -44,15 +56,19 @@ class App extends React.Component {
     output.innerHTML += '</ul>';
   }
 
+  addPackage() {
+    this.setState({visibleForm: false})
+  }
+
   render() {
     return (
       <div id="packages-container">
         <div id="packages">
         <span>Packages</span><span id="create-package"><button onClick={() => this.showForm()}>Create New Package</button></span>
         </div>
-        <Modal visible={this.state.visibleForm} width="50%" height="80%" effect="fadeInUp" onClickAway={() => this.hideForm()}>
+        <Modal visible={this.state.visibleForm} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hideForm()}>
           <div>
-            <Form updateFileList={this.updateFileList}/>
+            <Form toggleRequiredQuantity={this.toggleRequiredQuantity} updateFileList={this.updateFileList} addPackage={this.addPackage}/>
           </div>
         </Modal>
       </div>

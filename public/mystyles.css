@@ -35,3 +35,48 @@ button:hover {
 #form-container {
   margin: 50px;
 }
+
+input[type="text"] {
+  font-family: 'Open Sans', sans-serif;
+}
+
+input[type="date"] {
+  font-family: 'Open Sans', sans-serif;
+}
+#quantities-options {
+  text-align:center;
+ }
+
+#quantities-options input{
+  margin: 0px 0px 0px 0px;
+ }
+
+ #quantities-options label{
+   margin: 0px 20px 0px 3px;
+ }
+
+ /* textarea {
+  resize: none;
+} */
+
+li {
+  font-size: 8px;
+}
+
+textarea {
+  width: 100%;
+}
+
+#package-name {
+  width: 100%;
+}
+
+input[type=submit] {
+  font-family: inherit;
+  font-size: 1em;
+  background-color: #8f8888;
+}
+
+input[type=submit]:hover {
+  background-color: rgb(211, 212, 211);
+}
