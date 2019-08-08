@@ -38,8 +38,8 @@ const Form = (props) => {
           <input onChange={props.toggleRequiredQuantity}id ="other-checkbox" type="checkbox" value="Other"></input>
           <label for="Other">Other</label>
           <br></br>
-          <div> If "Other", please input value here: 
-          <input id ="other-input" type="text"></input>
+          <div> If other, please input value here: 
+          <input id ="other-input" type="text" size="5"></input>
           </div>
         </div>
       </div>
