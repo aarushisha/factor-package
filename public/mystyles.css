@@ -12,4 +12,26 @@ body {
 #logo {
   height: 40px;
   width: 40px;
+  padding-bottom: 10px;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1em;
+  background-color: #8f8888;
+}
+
+button:hover {
+  background-color: white;
+}
+
+#packages-container {
+  padding-left: 30%;
+}
+#create-package {
+  padding-left: 30%;
+}
+
+#form-container {
+  margin: 50px;
 }
