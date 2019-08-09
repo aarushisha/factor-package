@@ -18,6 +18,7 @@ class App extends React.Component {
     this.updateFileList = this.updateFileList.bind(this);
     this.addPackage = this.addPackage.bind(this);
     this.toggleRequiredQuantity = this.toggleRequiredQuantity.bind(this);
+    this.getPackages = this.getPackages.bind(this);
   }
 
   showForm() {
@@ -84,9 +85,18 @@ class App extends React.Component {
       alert('Please enter appropriate requested quantity')
     } else {
       //send request to server with form data (how to send attachments to server to save?)
-
+      axios.post('/packages', dataObj)
+        .then(response => console.log(response))
+        .catch(err => console.log(err));
     }
-    
+  }
+
+  componentDidMount() {
+    this.getPackages();
+  }
+
+  getPackages() {
+    console.log('get packages');
   }
 
   render() {

@@ -4,7 +4,7 @@ import moment from 'moment';
 const Form = (props) => {
   return (
     <div id="form-container">
-      <form>
+      <form enctype="multipart/form-data">
       <div>
         Package Name: 
         <br></br>
@@ -46,7 +46,7 @@ const Form = (props) => {
       </div>
       <br></br>
       <div>
-        Due Date: <input id="due-date" type="date" class="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")}></input>
+        Due Date: <input id="due-date" type="date" className="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")}></input>
       </div>
       <br></br>
       <div>

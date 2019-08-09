@@ -5,9 +5,24 @@ const port = 3000;
 
 const app = express();
 app.use(express.static(__dirname + '/public/'));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 app.post('/packages', (req, res) => {
-  console.log(req.body)
+  var data = req.body;
+  var name = data.name;
+  var files = data.files;
+  console.log(files);
+  var dueDate = data.dueDate
+  var description = data.description;
+  var quantities = data.quantities;
+  connection.query(`INSERT INTO packages (name, due_date, date_added, description) VALUES ("${name}", STR_TO_DATE("${dueDate}", '%Y-%m-%d'), CURDATE(), "${description}")`, (err, results) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('successfully added to packages table!')
+    }
+  });
 })
 
 
