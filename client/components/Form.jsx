@@ -7,7 +7,7 @@ const Form = (props) => {
       <div>
         Package Name: 
         <br></br>
-      <input id="package-name" type="text"></input>
+      <input id="package-name" type="text" required></input>
       </div>
       <div>
         Package Files: 
@@ -45,15 +45,15 @@ const Form = (props) => {
       </div>
       <br></br>
       <div>
-        Due Date: <input type="date"></input>
+        Due Date: <input id="due-date" type="date" min="2019-08-08"></input>
       </div>
       <br></br>
       <div>
         Description/Notes: 
-        <textarea rows="10" cols="100"></textarea>
+        <textarea id="description-notes" rows="10" cols="100"></textarea>
       </div>
-      <input type="submit" value="Add Package!"></input>
-      </form>
+      </form>  
+      <button id="button-add-package" onClick={() => props.addPackage()}>Add package!</button>  
     </div>
   )
 }

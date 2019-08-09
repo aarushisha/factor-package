@@ -57,7 +57,24 @@ class App extends React.Component {
   }
 
   addPackage() {
-    this.setState({visibleForm: false})
+    var button = document.getElementById('button-add-package');
+    var name = document.getElementById("package-name").value;
+    var otherCheckbox = document.getElementById("other-checkbox");
+    var otherInput = document.getElementById("other-input");
+    var files = document.getElementById('file').files;
+    var date = document.getElementById("due-date").value;
+    var description = document.getElementById('description-notes').value;
+    var otherValue = parseInt(otherInput.value);
+    console.log(parseInt(otherInput.value));
+    // console.log(name, files, date, description);
+    if (name === "") {
+      alert('Please fill out package name');
+    } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(parseInt(otherInput.value)))) {
+      alert('Please enter appropriate requested quantity')
+    } else {
+
+    }
+    
   }
 
   render() {
