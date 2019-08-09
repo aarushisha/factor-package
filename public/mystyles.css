@@ -23,6 +23,7 @@ button {
 
 button:hover {
   background-color: white;
+  cursor: pointer;
 }
 
 #packages-container {
@@ -83,4 +84,8 @@ input[type=submit]:hover {
 
 #packages-list {
   font-size: 14px;
+}
+
+.individual-package {
+  cursor: pointer;
 }

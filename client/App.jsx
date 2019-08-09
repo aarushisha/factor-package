@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import Modal from 'react-awesome-modal';
 import Form from './components/Form.jsx';
 import axios from 'axios';
+import PackageView from './components/PackageView.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -21,6 +22,7 @@ class App extends React.Component {
     this.addPackage = this.addPackage.bind(this);
     this.toggleRequiredQuantity = this.toggleRequiredQuantity.bind(this);
     this.getPackages = this.getPackages.bind(this);
+    this.getPackage = this.getPackage.bind(this);
   }
 
   showForm() {
@@ -107,6 +109,8 @@ class App extends React.Component {
   }
 
   getPackage() {
+    this.showPackage();
+
 
   }
 
@@ -118,11 +122,16 @@ class App extends React.Component {
           <br></br>
         </div>
         <div id="packages-list">
-          {this.state.packages.map(pack => <div>{pack.name}</div>)}
+          {this.state.packages.map(pack => <div className="individual-package" onClick={() => this.getPackage()}>{pack.name}</div>)}
         </div>
         <Modal visible={this.state.visibleForm} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hideForm()}>
           <div>
             <Form toggleRequiredQuantity={this.toggleRequiredQuantity} updateFileList={this.updateFileList} addPackage={this.addPackage}/>
+          </div>
+        </Modal>
+        <Modal visible={this.state.visiblePackage} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hidePackage()}>
+          <div>
+            <PackageView selectedPackage={this.state.selectedPackage}/>
           </div>
         </Modal>
       </div>
