@@ -91,9 +91,9 @@ class App extends React.Component {
         .then(response => {
           console.log(response)
         })
-        .then(() => this.hideForm())
-        .then(() => location.reload())
+        .then(() => location.reload(true))
         .catch(err => console.log(err));
+      location.reload();
     }
   }
 
