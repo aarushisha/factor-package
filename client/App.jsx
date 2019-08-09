@@ -63,7 +63,7 @@ class App extends React.Component {
     var otherCheckbox = document.getElementById("other-checkbox");
     var otherInput = document.getElementById("other-input");
     var files = document.getElementById('file').files;
-    var date = document.getElementById("due-date").value;
+    var dueDate = document.getElementById("due-date").value;
     var description = document.getElementById('description-notes').value;
     var otherValue = parseInt(otherInput.value);
     var checkboxes = document.getElementById('quantities-options').childNodes;
@@ -76,8 +76,8 @@ class App extends React.Component {
     if (Number.isNaN(otherValue) === false) {
       quantities.push(parseInt(otherInput.value));
     }
-    console.log(quantities);
-    // console.log(name, files, date, description);
+    var dataObj = {name: name, files: files, dueDate: dueDate, description: description, quantities: quantities };
+    console.log(dataObj);
     if (name === "") {
       alert('Please fill out package name');
     } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(otherValue))) {

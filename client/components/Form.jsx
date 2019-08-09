@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const Form = (props) => {
   return (
@@ -45,7 +46,7 @@ const Form = (props) => {
       </div>
       <br></br>
       <div>
-        Due Date: <input id="due-date" type="date" min="2019-08-08"></input>
+        Due Date: <input id="due-date" type="date" class="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")}></input>
       </div>
       <br></br>
       <div>
