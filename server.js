@@ -9,6 +9,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get('/packages', (req, res) => {
+  connection.query(`SELECT name FROM packages`, (err, results) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('successfully getting names of all packages');
+      res.send(results);
+    }
+  })
 
 })
 

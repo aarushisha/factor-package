@@ -10,6 +10,8 @@ class App extends React.Component {
     this.state = {
       visibleForm: false,
       visiblePackage: false,
+      packages: [],
+      selectedPackage: {}
     };
     this.showForm = this.showForm.bind(this);
     this.hideForm = this.hideForm.bind(this);
@@ -86,9 +88,13 @@ class App extends React.Component {
     } else {
       //send request to server with form data (how to send attachments to server to save?)
       axios.post('/packages', dataObj)
-        .then(response => console.log(response))
+        .then(response => {
+          console.log(response)
+        })
+        .then(() => this.hideForm())
         .catch(err => console.log(err));
     }
+    location.reload(true);
   }
 
   componentDidMount() {
@@ -96,14 +102,23 @@ class App extends React.Component {
   }
 
   getPackages() {
-    console.log('get packages');
+    axios.get('/packages')
+      .then(results => this.setState({packages: results.data}))
+  }
+
+  getPackage() {
+
   }
 
   render() {
     return (
       <div id="packages-container">
         <div id="packages">
-        <span>Packages</span><span id="create-package"><button onClick={() => this.showForm()}>Create New Package</button></span>
+          <span>Packages</span><span id="create-package"><button onClick={() => this.showForm()}>Create New Package</button></span>
+          <br></br>
+        </div>
+        <div id="packages-list">
+          {this.state.packages.map(pack => <div>{pack.name}</div>)}
         </div>
         <Modal visible={this.state.visibleForm} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hideForm()}>
           <div>
