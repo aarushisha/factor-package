@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Modal from 'react-awesome-modal';
-import Form from './components/Form.jsx'
+import Form from './components/Form.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -65,13 +66,24 @@ class App extends React.Component {
     var date = document.getElementById("due-date").value;
     var description = document.getElementById('description-notes').value;
     var otherValue = parseInt(otherInput.value);
-    console.log(parseInt(otherInput.value));
+    var checkboxes = document.getElementById('quantities-options').childNodes;
+    var quantities = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked === true && checkboxes[i].value !== "Other") {
+        quantities.push(parseInt(checkboxes[i].value));
+      }
+    }
+    if (Number.isNaN(otherValue) === false) {
+      quantities.push(parseInt(otherInput.value));
+    }
+    console.log(quantities);
     // console.log(name, files, date, description);
     if (name === "") {
       alert('Please fill out package name');
-    } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(parseInt(otherInput.value)))) {
+    } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(otherValue))) {
       alert('Please enter appropriate requested quantity')
     } else {
+      //send request to server with form data (how to send attachments to server to save?)
 
     }
     
