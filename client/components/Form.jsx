@@ -4,7 +4,7 @@ import moment from 'moment';
 const Form = (props) => {
   return (
     <div id="form-container">
-      <form enctype="multipart/form-data">
+      <form encType="multipart/form-data">
       <div>
         Package Name: 
         <br></br>
