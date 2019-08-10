@@ -55,11 +55,9 @@ class App extends React.Component {
   updateFileList() {
     var input = document.getElementById('file');
     var output = document.getElementById('fileList');
-    output.innerHTML = '<ul>';
     for (var i = 0; i < input.files.length; i++) {
       output.innerHTML += '<li>' + input.files.item(i).name + '</li>'
     }
-    output.innerHTML += '</ul>';
   }
 
   addPackage() {
@@ -67,7 +65,13 @@ class App extends React.Component {
     var name = document.getElementById("package-name").value;
     var otherCheckbox = document.getElementById("other-checkbox");
     var otherInput = document.getElementById("other-input");
-    var files = document.getElementById('file').files;
+    var fileList = document.getElementById('fileList');
+    var files = [];
+    for (var i = 0; i < fileList.childNodes.length; i++) {
+      if (fileList.childNodes[i].innerHTML !== "") {
+        files.push(fileList.childNodes[i].innerHTML);
+      }
+    }
     var dueDate = document.getElementById("due-date").value;
     var description = document.getElementById('description-notes').value;
     var otherValue = parseInt(otherInput.value);
@@ -87,7 +91,10 @@ class App extends React.Component {
       alert('Please fill out package name');
     } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(otherValue))) {
       alert('Please enter appropriate requested quantity')
-    } else {
+    } else if (dueDate === "") {
+      alert('Please enter a due date')
+    }
+    else {
       //send request to server with form data (how to send attachments to server to save?)
       axios.post('/packages', dataObj)
         .then(response => {
@@ -109,9 +116,31 @@ class App extends React.Component {
   }
 
   getPackage() {
+    var name = event.target.innerHTML;
+    //use name to get id
+    console.log(name);
+    axios.post('/package', {name: name})
+    .then(results => {
+      var data = results.data;
+      var name = data[0].name;
+      var dueDate = data[0].due_date;
+      var addedDate = data[0].date_added;
+      var description = data[0].description;
+      var fileNames = [];
+      var quantities = [];
+      for (var i = 0; i < data.length; i++) {
+        if (!fileNames.includes(data[i].file_name)) {
+          fileNames.push(data[i].file_name)
+        }
+        if (!quantities.includes(data[i].quantity)) {
+          quantities.push(data[i].quantity)
+        }
+      }
+      var dataObj = {name: name, dueDate: dueDate, addedDate: addedDate, description: description, fileNames: fileNames, quantities: quantities}
+      console.log(dataObj);
+      this.setState({selectedPackage: dataObj})
+    })
     this.showPackage();
-
-
   }
 
   render() {

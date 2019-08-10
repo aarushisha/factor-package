@@ -17,14 +17,27 @@ app.get('/packages', (req, res) => {
       res.send(results);
     }
   })
+})
 
+app.post('/package', (req, res) => {
+  var name = req.body.name;
+  console.log(name);
+  //use name to get all packages info, quantities info, attachment names
+  connection.query(`SELECT packages.name, packages.due_date, packages.date_added, packages.description, attachments.file_name, quantities.quantity FROM packages INNER JOIN attachments ON attachments.packages_id = packages.id INNER JOIN quantities ON quantities.packages_id = packages.id WHERE packages.name = "${name}"`, (err, results) => {
+    if (err) {
+      console.log(errr)
+    } else {
+      console.log('successfully retrieved package information');
+      res.send(results);
+    }
+  })
 })
 
 app.post('/packages', (req, res) => {
   var data = req.body;
+  console.log('data ', data);
   var name = data.name;
   var files = data.files;
-  console.log(files);
   var dueDate = data.dueDate
   var description = data.description;
   var quantities = data.quantities;
@@ -39,6 +52,15 @@ app.post('/packages', (req, res) => {
             console.log(err)
           } else {
             console.log('successfully added to quantities table!');
+          }
+        })
+      }
+      for (var j = 0; j < files.length; j++) {
+        connection.query(`INSERT INTO attachments (packages_id, file_name) VALUES ((SELECT id FROM packages WHERE name = "${name}"), "${files[j]}")`, (err, results) => {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log('successfully added to attachments table!')
           }
         })
       }

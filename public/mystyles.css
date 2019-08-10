@@ -37,6 +37,10 @@ button:hover {
   margin: 50px;
 }
 
+#package-view-container{
+  margin: 50px;
+}
+
 input[type="text"] {
   font-family: 'Open Sans', sans-serif;
 }
