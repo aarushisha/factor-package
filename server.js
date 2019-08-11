@@ -24,7 +24,7 @@ app.post('/package', (req, res) => {
   var name = req.body.name;
   console.log(name);
   //use name to get all packages info, quantities info, attachment names
-  connection.query(`SELECT packages.name, packages.due_date, packages.date_added, packages.description, attachments.file_name, quantities.quantity FROM packages INNER JOIN attachments ON attachments.packages_id = packages.id INNER JOIN quantities ON quantities.packages_id = packages.id WHERE packages.name = "${name}"`, (err, results) => {
+  connection.query(`SELECT packages.name, packages.due_date, packages.date_added, packages.description, attachments.file_name, quantities.quantity FROM packages LEFT JOIN attachments ON attachments.packages_id = packages.id LEFT JOIN quantities ON quantities.packages_id = packages.id WHERE packages.name = "${name}"`, (err, results) => {
     if (err) {
       console.log(errr)
     } else {
