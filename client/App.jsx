@@ -147,7 +147,7 @@ class App extends React.Component {
     return (
       <div id="packages-container">
         <div id="packages">
-          <span>Packages</span><span id="create-package"><button onClick={() => this.showForm()}>Create New Package</button></span>
+          <div id="create-package"><button onClick={() => this.showForm()}>Create New Package</button></div>
           <br></br>
         </div>
         <div id="packages-list">

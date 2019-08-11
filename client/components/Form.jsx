@@ -17,6 +17,7 @@ const Form = (props) => {
         <br></br>
         <div id="fileList"></div>
       </div>
+      <button type="button">Upload Files</button>
       <br></br>
       <div>
         Requested Quantities: 
@@ -54,7 +55,7 @@ const Form = (props) => {
         <textarea id="description-notes" rows="10" cols="100"></textarea>
       </div>
       </form>  
-      <button id="button-add-package" onClick={() => props.addPackage()}>Add package!</button>  
+      <button id="button-add-package" onClick={() => props.addPackage()}>Submit</button>  
     </div>
   )
 }

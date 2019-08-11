@@ -4,15 +4,19 @@ import moment from 'moment';
 const PackageView = (props) => {
   return (
     <div id="package-view-container">
-      <div>Package Name: {props.selectedPackage.name}</div>
-      <div>Date Added: {moment(props.selectedPackage.addedDate).utc().format('MM/DD/YYYY')}</div>
-      <div>Due Date: {moment(props.selectedPackage.dueDate).utc().format('MM/DD/YYYY')}</div>
-      {props.selectedPackage.description === "" ? "" : <div>Description: {props.selectedPackage.description}</div>}
-      <div> Quantities Requested: 
-        {props.selectedPackage.quantities === undefined ? "" : props.selectedPackage.quantities.map(quantity => <div>{quantity}</div>)}
+      <div className="header-view">
+        <div className="package-view-name">{props.selectedPackage.name}</div>
+        <div id="dates">
+          <div id="date-added">Date Added: {moment(props.selectedPackage.addedDate).utc().format('MM/DD/YYYY')}</div>
+          <div id="due-date-view">Due Date: {moment(props.selectedPackage.dueDate).utc().format('MM/DD/YYYY')}</div>
+        </div>
       </div>
-      <div> Attachmentns: 
-        {props.selectedPackage.fileNames === undefined ? "" : props.selectedPackage.fileNames.map(fileName => <div>{fileName}</div>)}
+      {props.selectedPackage.description === "" ? "" : <div><div>Description & Notes:</div><div>{props.selectedPackage.description}</div></div>}
+      <div> Quantities Requested: 
+        {props.selectedPackage.quantities === undefined ? "" : props.selectedPackage.quantities.map(quantity => <li>{quantity}</li>)}
+      </div>
+      <div> Attachments: 
+        {props.selectedPackage.fileNames === undefined ? "" : props.selectedPackage.fileNames.map(fileName => <li>{fileName}</li>)}
       </div>
     </div>
   )

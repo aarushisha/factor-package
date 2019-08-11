@@ -29,8 +29,13 @@ button:hover {
 #packages-container {
   padding-left: 30%;
 }
+
+#packages {
+  padding-bottom: 10px;
+  width: 50%
+}
 #create-package {
-  padding-left: 30%;
+  padding-left: 20%;
 }
 
 #form-container {
@@ -65,7 +70,8 @@ input[type="date"] {
 } */
 
 li {
-  font-size: 8px;
+  font-size: 12px;
+  list-style-type: square;
 }
 
 textarea {
@@ -88,8 +94,41 @@ input[type=submit]:hover {
 
 #packages-list {
   font-size: 14px;
+  border: black 5px solid;
+  width: 50%
 }
 
 .individual-package {
   cursor: pointer;
+}
+
+#date-added {
+  text-align: right;
+}
+#due-date-view {
+  text-align: right;
+}
+.package-view-name {
+  font-weight: 900;
+  font-size: 30px;
+  float: left;
+}
+
+#dates {
+  float: right;
+}
+.individual-package {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-bottom: 2px black solid;
+  width: 98%
+}
+
+#create-package {
+  float: right;
+}
+
+.header-view {
+  padding-bottom: 50px;
 }
