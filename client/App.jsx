@@ -87,12 +87,16 @@ class App extends React.Component {
     }
     var dataObj = {name: name, files: files, dueDate: dueDate, description: description, quantities: quantities };
     console.log(dataObj);
+    var checkboxes2 = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.prototype.slice.call(checkboxes2).some(x => x.checked);
     if (name === "") {
       alert('Please fill out package name');
     } else if (otherInput.hasAttribute('required', true) && (otherInput.value === "" || Number.isNaN(otherValue))) {
       alert('Please enter appropriate requested quantity')
     } else if (dueDate === "") {
       alert('Please enter a due date')
+    } else if (checkedOne === false) {
+      alert('Please select a quantity')
     }
     else {
       //send request to server with form data (how to send attachments to server to save?)
