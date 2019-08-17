@@ -8,7 +8,7 @@ const PackageView = (props) => {
         <div className="package-view-name">{props.selectedPackage.name}</div>
         <div id="dates">
           <div id="date-added">Date Added: {moment(props.selectedPackage.addedDate).utc().format('MM/DD/YYYY')}</div>
-          <div id="due-date-view">Due Date: {moment(props.selectedPackage.dueDate).utc().format('MM/DD/YYYY')}</div>
+          <div id="due-date-view">Expected Delivery Date: {moment(props.selectedPackage.dueDate).utc().format('MM/DD/YYYY')}</div>
         </div>
       </div>     
       <div> Quantities Requested:
