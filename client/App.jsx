@@ -23,6 +23,18 @@ class App extends React.Component {
     this.toggleRequiredQuantity = this.toggleRequiredQuantity.bind(this);
     this.getPackages = this.getPackages.bind(this);
     this.getPackage = this.getPackage.bind(this);
+    this.uploadFiles = this.uploadFiles.bind(this);
+  }
+
+  uploadFiles() {
+    const data = new FormData();
+    var input = document.getElementById('file');
+    var files = input.files;
+    for (var i = 0; i < files.length; i++) {
+      data.append('file', files[i], files[i].name)
+    }
+    console.log(data);
+    axios.post('/upload', data)
   }
 
   showForm() {
@@ -66,6 +78,7 @@ class App extends React.Component {
     var otherCheckbox = document.getElementById("other-checkbox");
     var otherInput = document.getElementById("other-input");
     var fileList = document.getElementById('fileList');
+    var inputFileList  =  document.getElementById('file').files;
     var files = [];
     for (var i = 0; i < fileList.childNodes.length; i++) {
       if (fileList.childNodes[i].innerHTML !== "") {
@@ -85,7 +98,7 @@ class App extends React.Component {
     if (Number.isNaN(otherValue) === false) {
       quantities.push(parseInt(otherInput.value));
     }
-    var dataObj = {name: name, files: files, dueDate: dueDate, description: description, quantities: quantities };
+    var dataObj = {name: name, files: files, dueDate: dueDate, description: description, quantities: quantities, fileList: inputFileList};
     console.log(dataObj);
     var checkboxes2 = document.querySelectorAll('input[type="checkbox"]');
     var checkedOne = Array.prototype.slice.call(checkboxes2).some(x => x.checked);
@@ -159,7 +172,7 @@ class App extends React.Component {
         </div>
         <Modal visible={this.state.visibleForm} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hideForm()}>
           <div>
-            <Form toggleRequiredQuantity={this.toggleRequiredQuantity} updateFileList={this.updateFileList} addPackage={this.addPackage}/>
+            <Form uploadFiles={this.uploadFiles} toggleRequiredQuantity={this.toggleRequiredQuantity} updateFileList={this.updateFileList} addPackage={this.addPackage}/>
           </div>
         </Modal>
         <Modal visible={this.state.visiblePackage} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hidePackage()}>

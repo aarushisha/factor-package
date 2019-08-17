@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connection = require('./db/index.js');
+const fileUpload = require('express-fileupload');
+const path = require('path');
 const cors = require('cors');
 const port = 3000;
 
@@ -8,6 +10,60 @@ const app = express();
 app.use(express.static(__dirname + '/public/'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(fileUpload({safeFileNames: true, preserveExtension: true}));
+
+app.post('/upload', (req, res) => {
+  // console.log(req.files.file);
+  if (req.files.file) {
+    console.log('file was entered')
+    if (Array.isArray(req.files.file) === false) {
+      console.log('only one file')
+     //is either an object if # of files === 1 or is an array if # of files > 1
+      var uploadFile = req.files.file;
+      var uploadFileName = req.files.file.name;
+      console.log("uploadFile------------------", uploadFile);
+      console.log("uploadFileName----------------------", uploadFileName);
+      uploadFile.mv(`${__dirname}/public/uploads/${uploadFileName}`, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('successful upload')
+        }
+      })
+    } else {
+      console.log('multiple files')
+      for (var i = 0; i < req.files.file.length; i++) {
+        var uploadFile = req.files.file[i];
+        var uploadFileName = req.files.file[i].name;
+        uploadFile.mv(`${__dirname}/public/uploads/${uploadFileName}`, (err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('successful upload');
+          }
+        })
+      }
+    }
+  }
+//   if (req.files.file.length > 0) {
+//   for (var i = 0; i < req.files.file.length; i++) {
+//     var uploadFile =  req.files.file[i];
+//     console.log('uploadFile', uploadFile);
+//     var fileName = req.files.file[i].name;
+//     console.log('fileName', fileName);
+//     uploadFile.mv(`${__dirname}/public/files/${fileName}`, (err) => {
+//       if (err) {
+//         console.log(err);
+//         return res.status(500);
+//       } else {
+//         console.log('uploaded file!');
+//         // res.json({file: `public/${req.files.file[i].name}`})
+        
+//       }
+//     })
+//   }
+// }
+})
 
 app.get('/packages', (req, res) => {
   connection.query(`SELECT name FROM packages`, (err, results) => {

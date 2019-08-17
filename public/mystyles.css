@@ -132,3 +132,8 @@ input[type=submit]:hover {
 .header-view {
   padding-bottom: 50px;
 }
+
+#button-add-package {
+  float: right;
+  font-size: 28px;
+}

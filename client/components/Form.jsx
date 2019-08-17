@@ -4,20 +4,12 @@ import moment from 'moment';
 const Form = (props) => {
   return (
     <div id="form-container">
-      <form encType="multipart/form-data">
+      <form encType='multipart/form-data' method='POST' action='/submitForm'>
       <div>
         Package Name: 
         <br></br>
       <input id="package-name" type="text" required></input>
       </div>
-      <div>
-        Package Files: 
-        <br></br>
-      <input onChange={props.updateFileList} id="file" type="file" multiple></input>
-        <br></br>
-        <div id="fileList"></div>
-      </div>
-      <button type="button">Upload Files</button>
       <br></br>
       <div>
         Requested Quantities: 
@@ -47,15 +39,26 @@ const Form = (props) => {
       </div>
       <br></br>
       <div>
-        Due Date: <input id="due-date" type="date" className="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")}></input>
+        Due Date: <input id="due-date" type="date" className="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")} required></input>
       </div>
       <br></br>
       <div>
         Description/Notes: 
         <textarea id="description-notes" rows="10" cols="100"></textarea>
       </div>
-      </form>  
-      <button id="button-add-package" onClick={() => props.addPackage()}>Submit</button>  
+      <div id='package-files-container'>
+        Package Files: 
+        <br></br>
+      <input onChange={props.updateFileList} id="file" type="file" name='file' multiple></input>
+        <br></br>
+        <div id="fileList"></div>
+        <button onClick={() => props.uploadFiles()}type="button">Upload Files</button>
+      </div>
+      </form>
+      <br></br>
+      <div>
+      <button id="button-add-package" onClick={() => props.addPackage()}>Save Package</button>  
+      </div>
     </div>
   )
 }
