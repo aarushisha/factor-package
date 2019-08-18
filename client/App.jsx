@@ -24,6 +24,13 @@ class App extends React.Component {
     this.getPackages = this.getPackages.bind(this);
     this.getPackage = this.getPackage.bind(this);
     this.uploadFiles = this.uploadFiles.bind(this);
+    this.getAttachment = this.getAttachment.bind(this);
+  }
+
+  getAttachment() {
+    var name = event.target.innerHTML;
+    axios.get(`/attachment?NAME=${name}`,)
+    .then(window.open(`/attachment?NAME=${name}`));
   }
 
   uploadFiles() {
@@ -134,8 +141,6 @@ class App extends React.Component {
 
   getPackage() {
     var name = event.target.innerHTML;
-    //use name to get id
-    console.log(name);
     axios.post('/package', {name: name})
     .then(results => {
       var data = results.data;
@@ -177,7 +182,7 @@ class App extends React.Component {
         </Modal>
         <Modal visible={this.state.visiblePackage} width="50%" height="95%" effect="fadeInUp" onClickAway={() => this.hidePackage()}>
           <div>
-            <PackageView selectedPackage={this.state.selectedPackage}/>
+            <PackageView getAttachment={this.getAttachment} selectedPackage={this.state.selectedPackage}/>
           </div>
         </Modal>
       </div>

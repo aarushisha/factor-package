@@ -10,7 +10,19 @@ const app = express();
 app.use(express.static(__dirname + '/public/'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(fileUpload({safeFileNames: true, preserveExtension: true}));
+app.use(fileUpload({safeFileNames: true, preserveExtension: 4}));
+
+app.get('/attachment', (req, res) => {
+  var name = req.originalUrl.split('=')[1];
+  res.download(`${__dirname}/public/uploads/${name}`, name, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(res.headersSent);
+      console.log('successfully downloaded');
+    }
+  });
+})
 
 app.post('/upload', (req, res) => {
   // console.log(req.files.file);

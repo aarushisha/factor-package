@@ -15,9 +15,9 @@ const PackageView = (props) => {
         {props.selectedPackage.quantities === undefined || props.selectedPackage.quantities.toString() === [].toString() ? " N/A" : props.selectedPackage.quantities.map(quantity => <li>{quantity}</li>)}
       </div>
       <div> Attachments: 
-        {props.selectedPackage.fileNames === undefined || props.selectedPackage.fileNames.toString() === [].toString() ? " N/A" : props.selectedPackage.fileNames.map(fileName => <li>{fileName}</li>)}
+        {props.selectedPackage.fileNames === undefined || props.selectedPackage.fileNames.toString() === [].toString() ? " N/A" : props.selectedPackage.fileNames.map(fileName => <li id="file-name-text" onClick={() => props.getAttachment()}>{fileName}</li>)}
       </div>
-      {props.selectedPackage.description === "" ? "" : <div><div>Description & Notes:</div><div>{props.selectedPackage.description}</div></div>}
+      {props.selectedPackage.description === "" ? "" : <div><div>Description & Notes:</div><div id="description-text">{props.selectedPackage.description}</div></div>}
     </div>
   )
 }
