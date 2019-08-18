@@ -42,10 +42,6 @@ const Form = (props) => {
         Due Date: <input id="due-date" type="date" className="datepicker" min={moment().add(1, 'days').format("YYYY-MM-DD")} required></input>
       </div>
       <br></br>
-      <div>
-        Description/Notes: 
-        <textarea id="description-notes" rows="10" cols="100"></textarea>
-      </div>
       <div id='package-files-container'>
         Package Files: 
         <br></br>
@@ -53,6 +49,11 @@ const Form = (props) => {
         <br></br>
         <div id="fileList"></div>
         <button onClick={() => props.uploadFiles()}type="button">Upload Files</button>
+      </div>
+      <br></br>
+      <div>
+        Description/Notes: 
+        <textarea id="description-notes" rows="10" cols="100"></textarea>
       </div>
       </form>
       <br></br>
